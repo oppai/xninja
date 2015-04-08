@@ -1,0 +1,7 @@
+.bundle/
+tmp/
+log/
+
+# working
+*.swp
+*.swo
