@@ -1,4 +1,4 @@
 require 'rubygems'
 require './app'
 
-run XOppai::App
+run XNinja::App
