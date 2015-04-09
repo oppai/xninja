@@ -1,5 +1,8 @@
-<div>
- <% @top.each do |entry| %>
-  <a href="/video/<%=entry[:url]%>"><img style="width:150px;height:100px;" src="<%=entry[:thumbnail]%>"/></a>
- <% end %>
+<div class="container">
+  <h3>XVideos Ninja</h3>
+  <div class="row">
+    <% @top.each do |entry| %>
+      <a class="col-sx-3" href="/video/<%=entry[:url]%>"><img class="img-thumbnail" src="<%=entry[:thumbnail]%>"/></a>
+    <% end %>
+  </div>
 </div>
