@@ -3,7 +3,7 @@ require './lib/xninja'
 
 describe 'XNinja::Client' do
   client = XNinja::Client.new
-  it 'is not nill' do
+  it 'is not nil' do
     expect(client).not_to eq(nil)
   end
 
@@ -18,9 +18,10 @@ describe 'XNinja::Client' do
 
   it 'get detail videos' do
     video  = client.top.first
-    detail = client.detail(video[:url])
+    detail = client.detail(video)
     expect(detail).not_to eq(nil)
-    expect(detail[:url].class).to eq(String)
+    expect(detail[:high].class).to eq(String)
+    expect(detail[:low].class).to eq(String)
     expect(detail[:thumbnail].class).to eq(String)
     expect(detail[:title].class).to eq(String)
   end

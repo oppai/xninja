@@ -1,5 +1,6 @@
 require 'open-uri'
 require 'nokogiri'
+require 'uri'
 
 module XNinja
   class Client
@@ -24,12 +25,16 @@ module XNinja
     end
 
     def detail(param)
-      @detail_doc = Nokogiri::HTML(open("http://www.xvideos.com#{param}",  'User-Agent' => @useragent))
-      p @detail_doc
-      url = @detail_doc.css('div#player a').last
-      thumbnail = @detail_doc.css('div#player img').first.attribute('src').value
-      title = @detail_doc.title
-      {:url => nil, :thumbnail=> nil, :title=> nil}
+      formated_param = param[:url].gsub(/\/[0-9]+\//, '/')
+      @detail_doc = Nokogiri::HTML(open("http://www.xvideos.com#{formated_param}",  'User-Agent' => @useragent))
+      nominator =  URI.extract(@detail_doc.css('div#content script').text.gsub(/\'/, ' ')).uniq
+      high = low = thumb = nil
+      nominator.each do |node|
+        high = node if /mp4/ =~ node
+        low = node if /3gp/ =~ node
+        thumb = node if /jpg/ =~ node
+      end
+      {:high => high, :low => low, :thumbnail => thumb, :title => param[:title]}
     end
   end
 end
