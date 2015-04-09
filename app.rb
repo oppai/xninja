@@ -3,9 +3,14 @@ require './lib/xninja'
 
 module XNinja 
   class App < Sinatra::Base
+    before do
+      @title = 'XNinja'
+    end
+
     get '/' do
       ninja = XNinja::Client.new
-      ninja.top.to_s
+      @top = ninja.top
+      erb :index
     end
   end
 end

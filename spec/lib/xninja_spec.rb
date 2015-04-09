@@ -15,4 +15,13 @@ describe 'XNinja::Client' do
       expect(n.keys).to eq(expected_keys)
     end
   end
+
+  it 'get detail videos' do
+    video  = client.top.first
+    detail = client.detail(video[:url])
+    expect(detail).not_to eq(nil)
+    expect(detail[:url].class).to eq(String)
+    expect(detail[:thumbnail].class).to eq(String)
+    expect(detail[:title].class).to eq(String)
+  end
 end
