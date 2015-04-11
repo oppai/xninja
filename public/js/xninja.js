@@ -15,9 +15,7 @@ var getNewVideos = (function (){
         if ( isLoading == false ) {
             isLoading = true;
             $.getJSON('/api/new/'+count,function(data){
-                console.log(data)
                 for (var i=0; i<data.length ;i++){
-                    console.log(i)
                     appendVideo(data[i]);
                 }
                 count ++;
