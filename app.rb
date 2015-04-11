@@ -4,6 +4,8 @@ require 'json'
 
 module XNinja 
   class App < Sinatra::Base
+    set :public_folder, File.dirname(__FILE__) + '/public'
+
     def ninja
       return @ninja unless @ninja.nil?
       @ninja = XNinja::Client.new
