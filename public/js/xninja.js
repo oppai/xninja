@@ -21,6 +21,7 @@ var getNewVideos = (function (){
                 count ++;
                 isLoading = false;
             });
+            ga('send', 'event', 'top', 'paging', count);
         }
     }
 })();
