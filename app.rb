@@ -13,6 +13,7 @@ module XNinja
 
     before do
       @title = 'XNinja'
+      @site_image = 'http://i.gyazo.com/7b5f0e024ef643aadda904c24d1c0eea.png'
     end
 
     get '/' do
