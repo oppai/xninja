@@ -15,7 +15,7 @@ module XNinja
     end
 
     def top(num=0)
-      return list("/new/#{num}/") if num > 0
+      return list("/new/#{num}/") if num.to_i > 0
       list
     end
 

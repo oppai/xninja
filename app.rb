@@ -1,5 +1,6 @@
 require 'sinatra'
 require './lib/xninja'
+require 'json'
 
 module XNinja 
   class App < Sinatra::Base
@@ -20,6 +21,10 @@ module XNinja
     get '/video/:id' do
       video = ninja.detail(params['id'])
       redirect video[:high]
+    end
+
+    get '/api/new/:id' do
+      ninja.top(params['id']).to_json
     end
   end
 end
