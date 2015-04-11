@@ -18,7 +18,7 @@ describe 'XNinja::Client' do
 
   it 'get detail videos' do
     video  = client.top.first
-    detail = client.detail(video)
+    detail = client.detail(video[:url])
     expect(detail).not_to eq(nil)
     expect(detail[:high].class).to eq(String)
     expect(detail[:low].class).to eq(String)
