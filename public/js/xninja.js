@@ -37,4 +37,9 @@ jWindow.on("load scroll resize",function(){
     }
 });
 
+var jSearch = $('#search_video');
+jSearch.find('button').click(function(){
+    var word = jSearch.find('#search_word').val();
+    location.href = '/search/'+word;
+});
 
