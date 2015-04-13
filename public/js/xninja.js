@@ -1,4 +1,5 @@
 var jWindow = $(window);
+var api_url = API_URL || '/api/new/';
 
 var appendVideo = function(video){
     var appendString = '<div class="col-xs-6 col-sm-4 col-md-2 col-lg-2">'
@@ -14,7 +15,7 @@ var getNewVideos = (function (){
     return function(){
         if ( isLoading == false ) {
             isLoading = true;
-            $.getJSON('/api/new/'+count,function(data){
+            $.getJSON(api_url+count,function(data){
                 for (var i=0; i<data.length ;i++){
                     appendVideo(data[i]);
                 }

@@ -17,8 +17,13 @@ module XNinja
     end
 
     get '/' do
-      @top = ninja.top
+      @list = ninja.top
       erb :index
+    end
+
+    get '/search/:word' do
+      @list = ninja.search(params['word'])
+      erb :search
     end
 
     get '/video/:id' do
@@ -29,5 +34,10 @@ module XNinja
     get '/api/new/:id' do
       ninja.top(params['id']).to_json
     end
+
+    get '/api/search/:word/:id' do
+      ninja.search(params['word'],params['id']).to_json
+    end
+
   end
 end

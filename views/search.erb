@@ -1,3 +1,9 @@
+<script>
+    var names = document.location.pathname.split('/');
+    var word  = names[names.length - 1];
+    var API_URL = '/api/search/'+word+'/';
+</script>
+<script src="/js/xninja.js"></script>
 <div class="container">
   <div class="row" id="videos">
     <% @list.each do |entry| %>

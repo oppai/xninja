@@ -19,6 +19,11 @@ module XNinja
       list
     end
 
+    def search(word,num=0)
+      return list("/?k=#{word}&p=#{num}") if num.to_i > 0
+      list("/?k=#{word}")
+    end
+
     def detail(param)
       formated_param = Base64.decode64(param).gsub(/\/[0-9]+\//, '/')
       detail_doc = Nokogiri::HTML(open("#{@base_url}#{formated_param}",  'User-Agent' => @useragent))
