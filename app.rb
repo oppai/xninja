@@ -6,6 +6,10 @@ module XNinja
   class App < Sinatra::Base
     set :public_folder, File.dirname(__FILE__) + '/public'
 
+    if ENV['RACK_ENV'] == "production" then
+      disable :show_exceptions
+    end
+
     def ninja
       return @ninja unless @ninja.nil?
       @ninja = XNinja::Client.new
