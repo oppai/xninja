@@ -16,7 +16,7 @@ module XNinja
     end
 
     before do
-      @title = 'XNinja'
+      @title = 'X Ninja'
       @site_image = 'http://i.gyazo.com/7b5f0e024ef643aadda904c24d1c0eea.png'
     end
 
