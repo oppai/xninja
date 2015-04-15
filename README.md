@@ -6,4 +6,6 @@ X Oppai Ninja
 ```
 $ bundle install
 $ bundle exec shotgun -p 5000
+$ bundle exec unicorn -E production -D # for production
 ```
+
