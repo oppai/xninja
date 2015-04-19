@@ -2,10 +2,9 @@ var api_url = API_URL || '/api/new/';
 (function(){
     var jWindow = $(window);
     var appendVideo = function(video){
-        var appendString = '<div class="col-xs-6 col-sm-4 col-md-2 col-lg-2">'
-            + '<a href="/video/'+ video.url +'">'
-            + '<img class="img-rounded img-responsive" src="'+ video.thumbnail +'">'
-            + '</a></div>';
+        var appendString = '<a href="/video/'+ video.url +'">'
+            + '<img class="xn-thumbnail" src="'+ video.thumbnail +'"/>'
+            + '</a>';
         $('#videos').append(appendString);
     };
 

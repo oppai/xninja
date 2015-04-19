@@ -1,0 +1,6 @@
+<script src="/js/xninja.js"></script>
+<div class="container" id="videos">
+  <% @list.each do |entry| %>
+    <a href="/video/<%=entry[:url]%>"><img class="xn-thumbnail" src="<%=entry[:thumbnail]%>"/></a>
+  <% end %>
+</div>
