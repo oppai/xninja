@@ -2,13 +2,11 @@ require 'sinatra'
 require './lib/xninja'
 require 'json'
 
-module XNinja 
+module XNinja
   class App < Sinatra::Base
     set :public_folder, File.dirname(__FILE__) + '/public'
 
-    if ENV['RACK_ENV'] == "production" then
-      disable :show_exceptions
-    end
+    disable :show_exceptions if ENV['RACK_ENV'] == 'production'
 
     def ninja
       return @ninja unless @ninja.nil?
@@ -40,8 +38,7 @@ module XNinja
     end
 
     get '/api/search/:word/:id' do
-      ninja.search(params['word'],params['id']).to_json
+      ninja.search(params['word'], params['id']).to_json
     end
-
   end
 end

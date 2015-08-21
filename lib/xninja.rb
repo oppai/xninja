@@ -10,22 +10,20 @@ module XNinja
       @base_url  = 'http://www.xvideos.com'
     end
 
-    def document
-      @document
-    end
+    attr_reader :document
 
-    def top(num=0)
+    def top(num = 0)
       return list("/new/#{num}/") if num.to_i > 0
       list
     end
 
-    def search(word,num=0)
+    def search(word, num = 0)
       return list("/?k=#{word}&p=#{num}") if num.to_i > 0
       list("/?k=#{word}")
     end
 
     def detail(param)
-      formated_param = Base64.decode64(param).gsub(/\/[0-9]+\//, '/')
+      formated_param = Base64.decode64(param).gsub(%r{/[0-9]+/}, '/')
       detail_doc = Nokogiri::HTML(open("#{@base_url}#{formated_param}",  'User-Agent' => @useragent))
       nominator =  URI.extract(detail_doc.css('div#content script').text.gsub(/\'/, ' ')).uniq
       high = low = thumb = nil
@@ -34,22 +32,26 @@ module XNinja
         low = node if /3gp/ =~ node
         thumb = node if /jpg/ =~ node
       end
-      {:high => high, :low => low, :thumbnail => thumb, :title => detail_doc.title}
+      { high: high, low: low, thumbnail: thumb, title: detail_doc.title }
     end
 
     private
 
     def list(path = '')
+      movie_thums(path).map do |entry|
+        title = entry.css('p a').first.attribute('title').value
+        url = entry.css('p a').first.attribute('href').value
+        thumbnail = entry.css('img').first.attribute('src').value
+        { title: title, url: Base64.encode64(url), thumbnail: thumbnail }
+      end
+    end
+
+    def movie_thums(path)
       escaped_path = URI.escape(path)
       document = Nokogiri::HTML(open("#{@base_url}/#{escaped_path}",  'User-Agent' => @useragent))
-      document.css("div.thumbInside").select{ |n|
-        n.css('div a').count > 0 
-      }.map{ |entry|
-        title = entry.css("p a").first.attribute("title").value
-        url = entry.css("p a").first.attribute("href").value
-        thumbnail = entry.css("img").first.attribute("src").value
-        {:title => title, :url => Base64.encode64(url), :thumbnail => thumbnail }
-      }
+      document.css('div.thumbInside').select do |n|
+        n.css('div a').size > 0
+      end
     end
   end
 end

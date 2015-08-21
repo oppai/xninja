@@ -10,7 +10,7 @@ describe 'XNinja::Client' do
   it 'has some contetns ' do
     top_contents = client.top
     expect(top_contents.count > 10).to eq(true)
-    expected_keys = {:title => 'hoge', :url => 'http://hogehoge.com', :thumbnail => 'hugahugahuga'}.keys
+    expected_keys = { title: 'hoge', url: 'http://hogehoge.com', thumbnail: 'hugahugahuga' }.keys
     top_contents.each do |n|
       expect(n.keys).to eq(expected_keys)
     end
