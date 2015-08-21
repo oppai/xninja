@@ -40,7 +40,8 @@ module XNinja
     private
 
     def list(path = '')
-      document = Nokogiri::HTML(open("#{@base_url}/#{path}",  'User-Agent' => @useragent))
+      escaped_path = URI.escape(path)
+      document = Nokogiri::HTML(open("#{@base_url}/#{escaped_path}",  'User-Agent' => @useragent))
       document.css("div.thumbInside").select{ |n|
         n.css('div a').count > 0 
       }.map{ |entry|
