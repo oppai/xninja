@@ -7,7 +7,6 @@ group :test do
 end
 
 group :development do
-  gem 'shotgun'
 end
 
 group :production do
