@@ -7,7 +7,7 @@ module XNinja
   class Client
     def initialize
       @useragent = 'Mozilla/5.0 (iPhone; CPU iPhone OS 8_0 like Mac OS X) AppleWebKit/600.1.3 (KHTML, like Gecko) Version/8.0 Mobile/12A4345d Safari/600.1.4'
-      @base_url  = 'http://www.xvideos.com'
+      @base_url  = 'http://jp.xvideos.com'
     end
 
     attr_reader :document
@@ -39,7 +39,7 @@ module XNinja
 
     def list(path = '')
       movie_thums(path).map do |entry|
-        title = entry.css('p a').first.attribute('title').value
+        title = entry.css('p a').first.inner_text
         url = entry.css('p a').first.attribute('href').value
         thumbnail = entry.css('img').first.attribute('src').value
         { title: title, url: Base64.encode64(url), thumbnail: thumbnail }
@@ -50,7 +50,7 @@ module XNinja
       escaped_path = URI.escape(path)
       document = Nokogiri::HTML(open("#{@base_url}/#{escaped_path}",  'User-Agent' => @useragent))
       document.css('div.thumbInside').select do |n|
-        n.css('div a').size > 0
+        n.css('p a').size > 0
       end
     end
   end
